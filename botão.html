@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Botão</title>
     <style>
-       
-    body, html {
+        body, html {
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
+            flex-direction: column;
         }
         h1 {
             position: absolute;
@@ -21,7 +21,13 @@
             color: #333;
             margin: 0;
         }
-    #botão {
+        #container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #botão {
             width: 10px; 
             height: 10px; 
             background-color: #FF0000; 
@@ -29,21 +35,22 @@
             border: none;
             border-radius: 50%;
             cursor: pointer;
+            position: relative;
         }
-
-
-    #mensagem {
-            margin-top: 20px;
+        #mensagem {
+            position: absolute;
+            bottom: 30px; /* Ajuste a distância acima do botão */
             text-align: center;
             font-size: 1.2em;
+            color: black;
         }
     </style>
 </head>
 <body>
     <h1>Aperte o botão!</h1>
-    <div>
-        <button id="botão"></button>
+    <div id="container">
         <p id="mensagem"></p>
+        <button id="botão"></button>
     </div>
 
     <script>
@@ -52,16 +59,13 @@
 
         botao.addEventListener("click", (event) => {
             const bounds = botao.getBoundingClientRect();
-            
-            
             const acertoX = bounds.left + bounds.width / 2;
             const acertoY = bounds.top + bounds.height / 2;
-            const margemErro = 3; 
+            const margemErro = 3;
 
-            
             if (
-            Math.abs(event.clientX - acertoX) <= margemErro &&
-            Math.abs(event.clientY - acertoY) <= margemErro
+                Math.abs(event.clientX - acertoX) <= margemErro &&
+                Math.abs(event.clientY - acertoY) <= margemErro
             ) {
                 mensagem.textContent = "Você acertou o botão!";
                 mensagem.style.color = "green";
