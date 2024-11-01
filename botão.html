@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão</title>
+    <style>
+       
+    body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        h1 {
+            position: absolute;
+            top: 20px;
+            font-size: 2.5em; 
+            text-align: center;
+            color: #333;
+            margin: 0;
+        }
+    #botão {
+            width: 10px; 
+            height: 10px; 
+            background-color: #FF0000; 
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+
+    #mensagem {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aperte o botão!</h1>
+    <div>
+        <button id="botão"></button>
+        <p id="mensagem"></p>
+    </div>
+
+    <script>
+        const botao = document.getElementById("botão");
+        const mensagem = document.getElementById("mensagem");
+
+        botao.addEventListener("click", (event) => {
+            const bounds = botao.getBoundingClientRect();
+            
+            
+            const acertoX = bounds.left + bounds.width / 2;
+            const acertoY = bounds.top + bounds.height / 2;
+            const margemErro = 3; 
+
+            
+            if (
+            Math.abs(event.clientX - acertoX) <= margemErro &&
+            Math.abs(event.clientY - acertoY) <= margemErro
+            ) {
+                mensagem.textContent = "Você acertou o botão!";
+                mensagem.style.color = "green";
+            } else {
+                mensagem.textContent = "Você errou o botão, tente de novo.";
+                mensagem.style.color = "red";
+            }
+        });
+    </script>
+</body>
+</html>
